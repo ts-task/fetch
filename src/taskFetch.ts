@@ -1,7 +1,7 @@
 import { Task } from '@ts-task/task';
 
 export const dependencies = {
-    fetch: (window && window.fetch) ? window.fetch : null
+    fetch: (typeof window !== 'undefined' && window.fetch) ? window.fetch : nul'
 };
 
 /**
