@@ -1,6 +1,6 @@
 {
   "name": "@ts-task/fetch",
-  "version": "0.0.0",
+  "version": "0.0.0-development",
   "description": "",
   "keywords": [],
   "main": "dist/fetch.umd.js",
@@ -12,7 +12,7 @@
   "author": "Hernan Rajchert <hrajchert@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git@github.com:ts-task/fetch.git"
+    "url": "https://github.com/ts-task/fetch"
   },
   "license": "MIT",
   "engines": {
@@ -82,7 +82,7 @@
     "prompt": "^1.0.0",
     "replace-in-file": "^3.0.0-beta.2",
     "rimraf": "^2.6.1",
-    "semantic-release": "^15.0.0",
+    "semantic-release": "^15.12.0",
     "shelljs": "^0.8.3",
     "ts-jest": "^22.0.0",
     "ts-node": "^6.0.0",
