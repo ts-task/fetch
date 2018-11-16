@@ -13,13 +13,13 @@ describe('fetch', () => {
     });
 
     it('Resolves if returns correctly', cb => {
-        fetchMock.mockReturnValue(Promise.resolve('yeay'));
+        fetchMock.mockReturnValue(Promise.resolve({ok: true}));
         fetch('https://jsonplaceholder.typicode.com/todos/1').fork(
             jestAssertUntypedNeverCalled(cb),
             assertFork(cb, response => {
                 // $ExpectType Response
                 response;
-                expect(response).toBe('yeay');
+                expect(response.ok).toBe(true);
             })
         );
     });
@@ -48,4 +48,48 @@ describe('fetch', () => {
         );
     });
 
+    describe('response', () => {
+        it('res.json() is wrapped to return a task', cb => {
+            const res = {
+                json: () => Promise.resolve('somejson')
+            };
+            fetchMock.mockReturnValue(Promise.resolve(res));
+            fetch('https://jsonplaceholder.typicode.com/todos/1')
+                .chain(res => {
+                    // $ExpectType () => Task<any, TypeError | UnknownError>
+                    res.json;
+                    return res.json();
+                })
+                .fork(
+                    jestAssertUntypedNeverCalled(cb),
+                    assertFork(cb, json => {
+                        // $ExpectType any
+                        json;
+                        expect(json).toBe('somejson');
+                    })
+                );
+        });
+        it('res.clone() is re-wrapped', cb => {
+            const res = {
+                json: () => Promise.resolve('somejson'),
+                clone: () => res
+            };
+            fetchMock.mockReturnValue(Promise.resolve(res));
+            fetch('https://jsonplaceholder.typicode.com/todos/1')
+                .map(res => res.clone())
+                .chain(res => {
+                    // $ExpectType () => Task<any, TypeError | UnknownError>
+                    res.json;
+                    return res.json();
+                })
+                .fork(
+                    jestAssertUntypedNeverCalled(cb),
+                    assertFork(cb, json => {
+                        // $ExpectType any
+                        json;
+                        expect(json).toBe('somejson');
+                    })
+                );
+        });
+    });
 });
