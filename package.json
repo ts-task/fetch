@@ -5,7 +5,7 @@
   "keywords": [],
   "main": "dist/fetch.umd.js",
   "module": "dist/fetch.es2015.js",
-  "typings": "dist/lib/fetch.d.ts",
+  "typings": "dist/lib/taskFetch.d.ts",
   "files": [
     "dist"
   ],
