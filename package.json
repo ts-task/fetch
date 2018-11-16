@@ -29,7 +29,8 @@
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "commit": "git-cz",
     "semantic-release": "semantic-release",
-    "semantic-release-prepare": "ts-node tools/semantic-release-prepare"
+    "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
+    "dtslint": "dtslint test"
   },
   "config": {
     "commitizen": {
@@ -76,6 +77,7 @@
     "coveralls": "^3.0.0",
     "cross-env": "^5.0.1",
     "cz-conventional-changelog": "^2.0.0",
+    "dtslint": "^0.3.0",
     "husky": "^0.14.0",
     "jest": "^22.0.2",
     "lodash.camelcase": "^4.3.0",

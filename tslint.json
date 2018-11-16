@@ -88,7 +88,7 @@
           "allow-null-check",
           "allow-undefined-check"
       ],
-      "file-name-casing": [true, "kebab-case"],
+      "file-name-casing": false,
       "unified-signatures": true,
       "use-isnan": true,
       "deprecation": true,

@@ -1,3 +1,6 @@
+/// <reference types="jest" />
+/// <reference types="node" />
+
 import { fetch } from '../src/taskFetch';
 import { assertFork, jestAssertUntypedNeverCalled } from './helpers';
 

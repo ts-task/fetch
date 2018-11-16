@@ -1,0 +1,25 @@
+{
+    "extends": "../node_modules/tsls/default-config/tsconfig.json",
+    "compilerOptions": {
+      "strict": true,
+      "outDir": "dist/lib",
+      "noImplicitAny": true,
+      "noImplicitThis": true,
+      "strictNullChecks": true,
+      "strictFunctionTypes": true,
+      "typeRoots": [
+        "node_modules/@types"
+      ],
+      "lib": [
+          "es2015", "dom"
+      ],
+      "baseUrl": ".",
+      "paths": {
+        "@ts-task/fetch": ["../src/taskFetch"]
+      }
+    },
+
+    "include": [
+      "."
+    ]
+  }
