@@ -1,0 +1,13 @@
+{
+  "extends": "./node_modules/tsls/default-config/tsconfig.json",
+  "compilerOptions": {
+    "strict": true,
+    "outDir": "dist/lib",
+    "typeRoots": [
+      "node_modules/@types"
+    ]
+  },
+  "include": [
+    "src"
+  ]
+}

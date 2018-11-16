@@ -1,0 +1,98 @@
+{
+  "name": "@ts-task/fetch",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [],
+  "main": "dist/fetch.umd.js",
+  "module": "dist/fetch.es2015.js",
+  "typings": "dist/lib/fetch.d.ts",
+  "files": [
+    "dist"
+  ],
+  "author": "Hernan Rajchert <hrajchert@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ts-task/fetch.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "scripts": {
+    "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
+    "build": "tsls build --libraryName=taskFetch && typedoc --out docs --target es6 --theme minimal --mode file src",
+    "start": "rollup -c rollup.config.ts -w",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
+    "deploy-docs": "ts-node tools/gh-pages-publish",
+    "report-coverage": "cat ./coverage/lcov.info | coveralls",
+    "commit": "git-cz",
+    "semantic-release": "semantic-release",
+    "semantic-release-prepare": "ts-node tools/semantic-release-prepare"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    },
+    "validate-commit-msg": {
+      "types": "conventional-commit-types",
+      "helpMessage": "Use \"npm run commit\" instead, we use conventional-changelog format :) (https://github.com/commitizen/cz-cli)"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/test/"
+    ],
+    "testURL": "http://localhost",
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 95,
+        "lines": 95,
+        "statements": 95
+      }
+    },
+    "collectCoverage": true
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.9",
+    "@types/node": "^10.12.5",
+    "colors": "^1.1.2",
+    "commitizen": "^2.9.6",
+    "coveralls": "^3.0.0",
+    "cross-env": "^5.0.1",
+    "cz-conventional-changelog": "^2.0.0",
+    "husky": "^0.14.0",
+    "jest": "^22.0.2",
+    "lodash.camelcase": "^4.3.0",
+    "prompt": "^1.0.0",
+    "replace-in-file": "^3.0.0-beta.2",
+    "rimraf": "^2.6.1",
+    "semantic-release": "^15.0.0",
+    "shelljs": "^0.8.3",
+    "ts-jest": "^22.0.0",
+    "ts-node": "^6.0.0",
+    "tslint": "^5.11.0",
+    "tsls": "0.0.2",
+    "typedoc": "^0.13.0",
+    "typescript": "^3.1.6",
+    "validate-commit-msg": "^2.12.2"
+  },
+  "dependencies": {
+    "@ts-task/task": "^1.0.1"
+  }
+}
