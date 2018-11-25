@@ -8,7 +8,7 @@ export const dependencies = {
     fetch: (typeof window !== 'undefined' && window.fetch) ? window.fetch.bind(window) : null
 };
 
-namespace TaskFetch {
+export namespace TaskFetch {
     export interface Body {
         /**
          * A simple getter used to expose a ReadableStream of the body contents.
@@ -96,7 +96,7 @@ const promisedMethods = ['arrayBuffer', 'blob', 'formData', 'json', 'text', 'tra
 const responseProxyHandler: ProxyHandler<Response> = {
     get: (target, propKey) => {
         // If we are asked for a method that returns a promise, convert it to task
-        if (typeof propKey === 'string' && promisedMethods.includes(propKey)) {
+        if (typeof propKey === 'string' && promisedMethods.indexOf(propKey) !== -1) {
             return () => Task.fromPromise((target as any)[propKey]());
         }
         // If we are asked to clone the response, then clone it, but also wrap it with
