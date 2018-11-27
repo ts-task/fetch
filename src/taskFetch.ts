@@ -1,5 +1,4 @@
 import { Task, UnknownError } from '@ts-task/task';
-
 /**
  * Object that holds the reference to the real fetch function. If it's defined in the window
  * it uses that, if not, you can change it if you like.
@@ -115,6 +114,19 @@ function wrapInProxy (res: Response): TaskFetch.Response {
     return new Proxy(res, responseProxyHandler) as any as TaskFetch.Response;
 }
 
+interface AbortRequestInit extends RequestInit {
+    signal: AbortSignal;
+}
+
+interface AbortError extends DOMException {
+    // tslint:disable-next-line:no-magic-numbers
+    code: 20;
+}
+
+export function isAbortError (error: any): error is AbortError {
+    // tslint:disable-next-line:no-magic-numbers
+    return typeof error === 'object' && error instanceof DOMException && error.code === 20;
+}
 /**
  * The Fetch API provides an interface for fetching resources
  * @param input the path to the resource you want to fetch
@@ -123,6 +135,8 @@ function wrapInProxy (res: Response): TaskFetch.Response {
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
  */
+export function fetch (input: RequestInfo, init: AbortRequestInit): Task<TaskFetch.Response, TypeError | AbortError>;
+export function fetch (input: RequestInfo, init?: RequestInit): Task<TaskFetch.Response, TypeError>;
 export function fetch (input: RequestInfo, init?: RequestInit) {
     // If the dependency is not set reject with a TypeError
     if (dependencies.fetch === null) {

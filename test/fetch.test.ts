@@ -1,7 +1,7 @@
 /// <reference types="jest" />
 /// <reference types="node" />
 
-import { fetch } from '../src/taskFetch';
+import { fetch, isAbortError } from '../src/taskFetch';
 import { assertFork, jestAssertUntypedNeverCalled } from './helpers';
 
 describe('fetch', () => {
@@ -91,5 +91,17 @@ describe('fetch', () => {
                     })
                 );
         });
+    });
+});
+
+describe('isAbortError', () => {
+    it('should return true when an AbortError is provided', () => {
+        const error = new DOMException('AbortError', 'AbortError');
+        expect(isAbortError(error)).toBe(true);
+    });
+
+    it('should return false when other error is provided', () => {
+        const error = new TypeError('some other error ');
+        expect(isAbortError(error)).toBe(false);
     });
 });
