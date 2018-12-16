@@ -14,7 +14,7 @@ npm i @ts-task/fetch
 import { fetch } from '@ts-task/fetch';
 
 fetch('https://jsonplaceholder.typicode.com/todos/1')
-  .map(response => response.json())
+  .chain(response => response.json())
   .fork(
       err => console.error('Oh no', err),
       json => console.log(json)
